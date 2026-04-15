@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ──────────────────────────────────────────────────────────
+   80road Brand Tokens  (mapped to Shadcn CSS variable names)
+   ────────────────────────────────────────────────────────── */
+@theme inline {
+  /* Layout */
+  --header-h: 56px;
+  --tab-h: 60px;
+  --sidebar-w: 260px;
+  --header-h-desktop: 64px;
+
+  /* Typography */
+  --font-sans: var(--font-tajawal), system-ui, sans-serif;
+
+  /* Shadcn color aliases */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* 80road custom brand colours */
+  --color-blue: var(--brand-blue);
+  --color-navy: var(--brand-navy);
+  --color-pale: var(--brand-pale);
+  --color-bg: var(--background);
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* ── Light mode ──────────────────────────────────────────── */
+:root {
+  --background: #FFFFFF;
+  --foreground: #111827;
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 255);
+
+  /* 80road primary: navy blue (#3B5897) */
+  --primary: #3B5897;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: #3B5897;
+  --muted: #F3F4F6;
+  --muted-foreground: #9CA3AF;
+  --accent: #F9FAFB;
+  --accent-foreground: #3B5897;
+  --destructive: oklch(0.58 0.24 27);
+  --border: #E5E7EB;
+  --input: #F3F4F6;
+  --ring: #3B5897;
+  --radius: 0.75rem;
+
+  /* 80road brand palette */
+  --brand-blue: #3E689B;
+  --brand-navy: #3B5897; 
+  --brand-pale: oklch(0.93 0.02 255);
+  --brand-bg-accent: #F1F5F9;
+  --input-fill: #F3F4F6;
+}
+
+/* ── Dark mode ───────────────────────────────────────────── */
+.dark {
+  --background: oklch(0.09 0.01 255);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.13 0.01 255);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.13 0.01 255);
+  --popover-foreground: oklch(0.97 0 0);
+
+  /* primary stays navy-blue but lighter for dark bg */
+  --primary: oklch(0.6 0.22 255);
+  --primary-foreground: oklch(0.09 0.01 255);
+
+  --secondary: oklch(0.19 0.01 255);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.19 0.01 255);
+  --muted-foreground: oklch(0.65 0.02 255);
+  --accent: oklch(0.19 0.01 255);
+  --accent-foreground: oklch(0.97 0 0);
+  --destructive: oklch(0.7 0.19 22);
+  --border: oklch(1 0 0 / 8%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: oklch(0.6 0.22 255);
+
+  --brand-blue: oklch(0.6 0.22 255);
+  --brand-navy: #3B5897;
+  --brand-pale: oklch(0.19 0.01 255);
+}
+
+/* ── Base resets ─────────────────────────────────────────── */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans scroll-smooth;
+    -webkit-tap-highlight-color: transparent;
+
+    /* ── Mobile Safe Areas ──────────────────────────────────────────────────
+       These CSS environment variables map to the device's safe area insets:
+       - top:    status bar / notch / Dynamic Island (iPhone)
+       - bottom: home indicator / gesture bar (iPhone X+, Android gesture nav)
+       - left/right: for landscape orientation on notched devices
+
+       Without these, Capacitor WebView content renders under the system UI.
+       The `--safe-area-*` tokens can be used anywhere in the app:
+         padding-top: var(--safe-area-top)      ← for fixed headers
+         padding-bottom: var(--safe-area-bottom) ← for fixed bottom navs
+    ────────────────────────────────────────────────────────────────────── */
+    --safe-area-top: env(safe-area-inset-top, 0px);
+    --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-left: env(safe-area-inset-left, 0px);
+    --safe-area-right: env(safe-area-inset-right, 0px);
+  }
+  body {
+    @apply bg-background text-foreground lining-nums tabular-nums;
+
+    /* Prevent pull-to-refresh and overscroll glow on mobile WebView.
+       Pull-to-refresh can interfere with page scroll — disable it. */
+    overscroll-behavior: none;
+
+    /* Prevent horizontal overscroll which causes a bouncy "white flash"
+       on iOS WebView when swiping sideways on RTL content. */
+    overflow-x: hidden;
+  }
+
+  /* 80road Typography System */
+  h1 {
+    @apply text-xl md:text-2xl font-black leading-[1.1] tracking-tight;
+  }
+  h2 {
+    @apply text-2xl md:text-4xl font-extrabold leading-[1.2] tracking-tight;
+  }
+  h3 {
+    @apply text-xl md:text-2xl font-bold leading-[1.3];
+  }
+  p {
+    @apply text-base md:text-lg font-normal leading-[1.6] text-foreground/90;
+  }
+  small {
+    @apply text-xs md:text-sm font-medium leading-[1.4];
+  }
+}
+
+/* ── Utilities ───────────────────────────────────────────── */
+@layer utilities {
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  /* Keyboard / Remote / TV focus ring — visible on all interactive elements */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+
+  .bg-vignette {
+    background: radial-gradient(
+      circle at center,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(245, 248, 250, 1) 50%,
+      rgba(62, 104, 155, 0.15) 100%
+    );
+    background-attachment: fixed;
+  }
+
+  .mobile-auth-card {
+    @apply bg-white rounded-[40px] shadow-[0px_25px_50px_-12px_rgba(0,0,0,0.12)];
+  }
+}

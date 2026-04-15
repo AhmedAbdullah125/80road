@@ -1,0 +1,91 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files — NEVER commit real credentials.
+# Only .env.example (template with placeholder values) should be committed.
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# ──────────────────────────────────────────────────────────────────────────────
+# MOBILE / CAPACITOR SENSITIVE FILES
+# These files contain private keys and credentials — NEVER commit them.
+# They must be stored in CI secrets (Codemagic) and injected at build time.
+# ──────────────────────────────────────────────────────────────────────────────
+
+# iOS Firebase config (contains project credentials)
+ios/App/App/GoogleService-Info.plist
+
+# iOS code signing (managed by Codemagic)
+*.p12
+*.p8
+*.mobileprovision
+ios/ExportOptions.plist
+
+# Android signing keystore
+*.keystore
+*.jks
+android/app/release.keystore
+android/local.properties
+
+# Android Gradle generated
+android/.gradle/
+android/app/build/
+
+# iOS CocoaPods (should be regenerated via pod install)
+ios/App/Pods/
+ios/App/App.xcworkspace/xcuserdata/
+
+# AI-related files
+AI_ENGINEERING_RULES.md
+AGENTS.md
+CLAUDE.md
+.mcp.json
+.gemini/
+.anthropic/
+
+# Other non-essential files
+eslint-errors.txt
+eslint-report.json
+80road-release.aab
+*.postman_collection*.json
+mapping.txt
+tmp/
