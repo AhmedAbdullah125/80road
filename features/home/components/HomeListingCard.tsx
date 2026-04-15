@@ -47,7 +47,7 @@ export function HomeListingCard({ listing }: Props) {
         
         {/* Status Badge (if any) */}
         <div className="absolute top-3 left-3 px-3 py-1 bg-black/40 backdrop-blur-md rounded-full text-[10px] text-white font-bold">
-          {listing.purpose || 'للإيجار'}
+          {listing.listingType || 'للإيجار'}
         </div>
 
         {/* Favorite Button */}
